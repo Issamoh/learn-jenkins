@@ -16,6 +16,23 @@ pipeline {
         mail(subject: 'build', body: 'build is done', cc: 'hm_ben_messaoud@esi.dz')
       }
     }
+ stage('Code Analysis') {
+      parallel {
+        stage('Code Analysis') {
+          steps {
+            bat 'gradle sonarqube'
+            waitForQualityGate true
+          }
+        }
+
+        stage('Test Reporting') {
+          steps {
+            cucumber '\'reports/example-report.json\''
+          }
+        }
+
+      }
+    }
 
     stage('deployment') {
       steps {
