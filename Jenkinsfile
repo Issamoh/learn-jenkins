@@ -16,7 +16,8 @@ pipeline {
         mail(subject: 'build', body: 'build is done', cc: 'hm_ben_messaoud@esi.dz')
       }
     }
-   stage('Code Analysis') {
+
+    stage('Code Analysis') {
       parallel {
         stage('Code Analysis') {
           steps {
@@ -33,6 +34,7 @@ pipeline {
 
       }
     }
+
     stage('deployment') {
       steps {
         bat 'gradle publish'
@@ -41,7 +43,7 @@ pipeline {
 
     stage('slack notification') {
       steps {
-        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'TSGEF9MGR/BSUBPE4BS/BM05OeSl0OtgT627ddwu9aXp', channel: '#déploiement-tp-gradle', message: 'Jenkins : new build and deployment', sendAsText: true, teamDomain: 'gradledeployments')
+        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'TSGEF9MGR/BSUBPE4BS/BM05OeSl0OtgT627ddwu9aXp', channel: '#dÃ©ploiement-tp-gradle', message: 'Jenkins : new build and deployment', sendAsText: true, teamDomain: 'gradledeployments')
       }
     }
 
