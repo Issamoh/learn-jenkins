@@ -25,7 +25,7 @@ pipeline {
 
     stage('slack notification') {
       steps {
-        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'TSGEF9MGR/BSUBPE4BS/BM05OeSl0OtgT627ddwu9aXp', channel: 'gradledeployments', message: 'Jenkins : new build and deployment', sendAsText: true, teamDomain: 'gradledeployments')
+        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'TSGEF9MGR/BSUBPE4BS/BM05OeSl0OtgT627ddwu9aXp', channel: '#déploiement-tp-gradle', message: 'Jenkins : new build and deployment', sendAsText: true, teamDomain: 'gradledeployments')
       }
     }
 
