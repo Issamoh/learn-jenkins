@@ -17,24 +17,6 @@ pipeline {
       }
     }
 
-    stage('Code Analysis') {
-      parallel {
-        stage('Code Analysis') {
-          steps {
-            bat 'gradle sonarqube'
-            waitForQualityGate true
-          }
-        }
-
-        stage('Test Reporting') {
-          steps {
-            cucumber '\'reports/example-report.json\''
-          }
-        }
-
-      }
-    }
-
     stage('deployment') {
       steps {
         bat 'gradle publish'
