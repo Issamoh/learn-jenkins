@@ -17,5 +17,11 @@ pipeline {
       }
     }
 
+    stage('deployment') {
+      steps {
+        bat 'gradle publish'
+      }
+    }
+
   }
 }
