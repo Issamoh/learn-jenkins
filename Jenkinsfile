@@ -17,15 +17,21 @@ pipeline {
       }
     }
 
-    stage('deployment') {
-      steps {
-        bat 'gradle publish'
-      }
-    }
+    stage('Code Analysis') {
+      parallel {
+        stage('Code Analysis') {
+          steps {
+            bat 'gradle sonarqube'
+            waitForQualityGate true
+          }
+        }
 
-    stage('slack notification') {
-      steps {
-        slackSend(baseUrl: 'https://hooks.slack.com/services/', token: 'TSGEF9MGR/BSUBPE4BS/BM05OeSl0OtgT627ddwu9aXp', channel: '#déploiement-tp-gradle', message: 'Jenkins : new build and deployment', sendAsText: true, teamDomain: 'gradledeployments')
+        stage('Test Reporting') {
+          steps {
+            cucumber '\'reports/example-report.json\''
+          }
+        }
+
       }
     }
 
